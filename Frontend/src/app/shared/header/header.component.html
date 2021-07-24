@@ -1,0 +1,115 @@
+<mat-toolbar color="primary" toggleFullscreen style="padding-left: 0;">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex='100'>
+    <div *ngIf="isSmallScreen" fxFlex="50">
+      <img style="height: 56px; cursor: pointer" (click)="router.navigate(['/home']); currentMenu = 0"
+        src="../../../assets/logo-small.png" />
+    </div>
+    <div *ngIf="!isSmallScreen" fxFlex="25">
+      <img style="height: 64px; cursor: pointer" (click)="router.navigate(['/home']); currentMenu = 0"
+        src="../../../assets/logo.png" />
+    </div>
+
+    <div *ngIf="isSmallScreen" fxFlex="50">
+      <a routerLink="/checkInOut" (click)="currentMenu = 12" mat-button
+        [ngClass]="{ 'is-current-menu': currentMenu === 12 }"
+        *ngIf="isSmallScreen && authService.isLoggedIn && !authService.isAdmin && !authService.isManager">
+        {{"Check I/O"| translate}}
+      </a>
+
+      <a routerLink="/scan" (click)="currentMenu = 10" mat-button [ngClass]="{ 'is-current-menu': currentMenu === 10 }"
+        *ngIf="isSmallScreen && authService.isLoggedIn && !authService.isAdmin && !authService.isManager">
+        {{"Scan"| translate}}
+      </a>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a routerLink="/staffs" (click)="currentMenu = 1" mat-menu-item
+          [ngClass]="{ 'is-current-menu-black': currentMenu === 1 }"
+          *ngIf="isSmallScreen && (authService.isAdmin || authService.isManager)">
+          {{"Staffs"| translate}}
+        </a>
+
+        <a routerLink="/jobs" (click)="currentMenu = 8" mat-menu-item
+          [ngClass]="{ 'is-current-menu-black': currentMenu === 8 }"
+          *ngIf="isSmallScreen && (authService.isAdmin || authService.isManager)">
+          {{"Jobs"| translate}}
+        </a>
+
+        <a routerLink="/profile" mat-menu-item *ngIf="authService.isLoggedIn">
+          {{ authService.userName | uppercase }}
+        </a>
+
+        <!-- <a *ngIf="authService.isAdmin" routerLink="/admin" mat-button>Admin</a> -->
+
+        <span *ngIf="!authService.isLoggedIn">
+          <!-- <a (click)="openLoginDialog()" mat-menu-item>{{"Login"| translate}}</a> -->
+          <a routerLink="/login" mat-menu-item>Login</a>
+          <a routerLink="/register" mat-menu-item>{{"Register"| translate}}</a>
+        </span>
+
+        <a (click)="authService.logout()" mat-menu-item *ngIf="authService.isLoggedIn">{{"Quit"| translate}}</a>
+
+        <a (click)="changeLanguage()" mat-menu-item>{{isChineseLang?'English':'中文'}}</a>
+      </mat-menu>
+    </div>
+
+    <div *ngIf="!isSmallScreen" [fxFlex]="70" fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" *ngIf="!isSmallScreen">
+        <a routerLink="/checkInOut" (click)="currentMenu = 12" mat-button
+          [ngClass]="{ 'is-current-menu': currentMenu === 12 }"
+          *ngIf="authService.isLoggedIn && !authService.isAdmin && !authService.isManager">
+          {{"Check I/O"| translate}}
+        </a>
+
+        <a routerLink="/scan" (click)="currentMenu = 10" mat-button
+          [ngClass]="{ 'is-current-menu': currentMenu === 10 }"
+          *ngIf="authService.isLoggedIn && !authService.isAdmin && !authService.isManager">
+          {{"Scan"| translate}}
+        </a>
+
+        <a routerLink="/staffs" (click)="currentMenu = 1" mat-button class="text-white"
+          [ngClass]="{ 'is-current-menu': currentMenu === 1 }" *ngIf="authService.isAdmin">
+          {{"Staffs"| translate}}
+        </a>
+
+        <a routerLink="/jobs" (click)="currentMenu = 8" mat-button class="text-white"
+          [ngClass]="{ 'is-current-menu': currentMenu === 8 }" *ngIf="authService.isAdmin || authService.isManager">
+          {{"Jobs"| translate}}
+        </a>
+      </div>
+
+      <!-- <div fxFill></div> -->
+
+      <div fxLayout="row" *ngIf="!isSmallScreen">
+        <div *ngIf="!authService.isLoggedIn">
+          <a routerLink="/login" mat-button class="text-white">Login</a>
+
+          <!-- <button mat-button (click)="openLoginDialog()">{{"Login"| translate}}</button> -->
+          <!-- <button mat-button (click)="openRegisterDialog()">{{"Register"| translate}}</button> -->
+        </div>
+
+        <!-- <a *ngIf="authService.isAdmin" routerLink="/admin" mat-button class="text-white">Admin</a> -->
+
+        <div *ngIf="authService.isLoggedIn">
+
+          <button mat-button [matMenuTriggerFor]="profileMenu">{{ authService.userName | uppercase }}</button>
+          <mat-menu #profileMenu="matMenu">
+            <a routerLink="/profile" mat-button>
+              {{"Edit Profile"| translate}}
+            </a>
+            <button mat-menu-item (click)="authService.logout()" *ngIf="!isSmallScreen">
+              {{"Quit"| translate}}
+            </button>
+          </mat-menu>
+
+        </div>
+
+        <!-- <button mat-button (click)="changeLanguage()">{{isChineseLang?'English':'中文'}}</button> -->
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+<!-- authService.isLoggedIn{{ authService.isLoggedIn }}
+authService.school{{authService.school}}-->

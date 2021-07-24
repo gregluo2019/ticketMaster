@@ -1,0 +1,79 @@
+<div class="no-print">
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="p-3">
+    <h1>Jobs</h1>
+    <!-- <div *ngIf="!isSmallScreen">
+    <button mat-raised-button color="primary" (click)="openJobDialog(null)" class="mb-3">
+      <mat-icon> add </mat-icon>{{"Add New"| translate}}
+    </button>
+  </div> -->
+
+    <div *ngIf="!isSmallScreen">
+      <app-upload style="margin-top:10px">
+      </app-upload>
+    </div>
+
+    <mat-form-field appearance="outline" fxFlex="30" fxFlex.xs="70">
+      <mat-label>Filter</mat-label>
+      <input matInput placeholder="Search" #filter />
+    </mat-form-field>
+  </div>
+
+  <mat-paginator [length]="countOfJobs" [pageSize]="20" showFirstLastButtons>
+  </mat-paginator>
+  <mat-table #table [dataSource]="dataSource" matSort [matSortDisableClear]="true" class="mat-cell">
+    <ng-container matColumnDef="qrCode">
+      <mat-header-cell *matHeaderCellDef> QR Code</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i = index">
+        <!-- style="overflow: unset;" -->
+        <app-qr-code [job]="row"></app-qr-code>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="jobNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Job Code</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.jobNumber }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.description | html2Plaintext }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions </mat-header-cell>
+      <mat-cell *matCellDef="let row; let i = index">
+        <!-- style="overflow: unset;" -->
+        <button mat-icon-button color="accent" (click)="openJobPage(row)" matTooltip="Details of the Job">
+          <mat-icon aria-label="Edit">dashboard</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="deleteJob(row.id)" matTooltip="Delete Job">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="openJobPage(row)">
+    </mat-row>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No results</td>
+    </tr>
+  </mat-table>
+
+  <mat-paginator [length]="countOfJobs" [pageSize]="20" showFirstLastButtons>
+  </mat-paginator>
+</div>
+<!-- <ng-template #itemsTemplate>
+  <div *ngFor="let job of jobs">
+    <div class="mb-3">
+      <app-job-item [job]="job"></app-job-item>
+    </div>
+  </div>
+</ng-template> -->
+
+<!-- dataSource:{{dataSource | json}} -->
+
+<app-print-page></app-print-page>

@@ -1,0 +1,95 @@
+﻿
+Add Clients table
+ChineseTeacher改为  Manager role
+
+=============================
+
+Add Classes in ChineseQuiz table
+Add Class in User table
+
+Add Chiid in Question table
+
+
+
+User, chineseTest表，增加school字段
+chineseTest表，增加name字段
+
+产生表。
+修改： ALTER TABLE `categories` ADD `DateModified` datetime(6)  DEFAULT NULL ;
+
+增加Manager role
+INSERT INTO `forum`.`aspnetroles`
+(`Id`,
+`Name`,
+`NormalizedName`,
+`ConcurrencyStamp`)
+VALUES
+('9a746226-e5aa-457b-a442-f7efd80ecce1',
+'Manager',
+'CHINESETEACHER',
+'a4ec2e89-61bb-4609-8a97-c3680f0263b1');
+
+修改User的Role为Manager
+UPDATE `forum`.`aspnetuserroles` SET `RoleId` = '9a746226-e5aa-457b-a442-f7efd80eccee' 
+WHERE `UserId` = '67bdeca8-6ecd-4cd4-a8df-1c0f37963d19'
+
+/////////////////////////
+CREATE TABLE `chinesetests` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Type` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Subtype` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `Content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `File` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `AnswerA` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `AnswerB` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `AnswerC` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `AnswerD` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `AnswerE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `CorrectAnswer` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `Source` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `Solution` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `setNo` int NOT NULL,
+  `correctAnswerCount` int NOT NULL,
+  `totalAnswerCount` int NOT NULL,
+  `DateModified` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `chinesetestscores` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `setNo` int NOT NULL,
+  `typeSetNo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `score` float NOT NULL,
+  `count` int NOT NULL,
+  `DateModified` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `chinesetestusers` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `UserId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `ChineseTestId` int NOT NULL,
+  `MyAnswer` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `MyAnswerAudio` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `MyAnswerWriting` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `isCorrect` tinyint(1) NOT NULL,
+  `DateModified` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `IX_ChineseTestUsers_ChineseTestId` (`ChineseTestId`),
+  KEY `IX_ChineseTestUsers_UserId` (`UserId`),
+  CONSTRAINT `FK_ChineseTestUsers_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE RESTRICT,
+  CONSTRAINT `FK_ChineseTestUsers_ChineseTests_ChineseTestId` FOREIGN KEY (`ChineseTestId`) REFERENCES `chinesetests` (`Id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `forum`.`aspnetroles`
+(`Id`,
+`Name`,
+`NormalizedName`,
+`ConcurrencyStamp`)
+VALUES
+('9a746226-e5aa-457b-a442-f7efd80eccee',
+'HuaxiaAdmin',
+'HUAXIAADMIN',
+'a4ec2e89-61bb-4609-8a97-c3680f0263b1');

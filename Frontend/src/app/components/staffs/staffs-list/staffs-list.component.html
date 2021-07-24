@@ -1,0 +1,65 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between center" class="p-3">
+  <div class="mat-h1">{{"Staffs"| translate}}</div>
+
+  <div>
+    <button mat-stroked-button color="primary" (click)="addNew()" class="mb-3">
+      <mat-icon> add </mat-icon>{{"Add New"| translate}}
+    </button>
+  </div>
+
+  <mat-form-field appearance="outline" color="accent" class="item" fxFlex="30" fxFlex.xs="70">
+    <mat-label>{{"Filter"| translate}}</mat-label>
+    <input matInput placeholder="Search staff" #filter />
+  </mat-form-field>
+</div>
+
+<mat-table #table [dataSource]="dataSource" matSort [matSortDisableClear]="true" class="mat-cell">
+  <ng-container matColumnDef="actions" *ngIf="!isSmallScreen">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+
+    <mat-cell *matCellDef="let row; let i = index">
+      <button mat-icon-button color="accent" (click)="userSelected(row)">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="accent" (click)="deleteStaff(i, row.id, row.phone)">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="userName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.userName }}
+      <mat-chip-list *ngIf="row.isManager" class="ml-3">
+        <mat-chip style="background-color: #E65100;color:white">
+          Manager
+        </mat-chip>
+      </mat-chip-list>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="phone" *ngIf="!isSmallScreen">
+    <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.phone }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>Email </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.email }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="note" *ngIf="!isSmallScreen">
+    <mat-header-cell *matHeaderCellDef>Note </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.note | html2Plaintext }}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No results</td>
+  </tr>
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="[10, 20, 50, 100, 200]" [pageSize]="20"></mat-paginator>

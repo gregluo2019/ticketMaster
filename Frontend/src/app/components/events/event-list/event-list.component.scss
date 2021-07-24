@@ -1,0 +1,47 @@
+@media only screen and (max-width: 601px) {
+  .item {
+    max-width: 8rem;
+  }
+
+  .mat-cell:nth-child(1),
+  .mat-header-cell:nth-child(1) {
+    flex: 0 0 14%;
+  }
+
+  .mat-cell:nth-child(2),
+  .mat-header-cell:nth-child(2) {
+    flex: 0 0 56%;
+  }
+
+  .mat-cell:nth-child(3),
+  .mat-header-cell:nth-child(3) {
+    flex: 0 0 30%;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+
+  .mat-cell:nth-child(1),
+  .mat-header-cell:nth-child(1) {
+    flex: 0 0 5%;
+  }
+
+  .mat-cell:nth-child(2),
+  .mat-header-cell:nth-child(2) {
+    flex: 0 0 15%;
+  }
+
+  .mat-cell:nth-child(3),
+  .mat-header-cell:nth-child(3) {
+    flex: 0 0 15%;
+  }
+
+  .mat-cell:nth-child(4),
+  .mat-header-cell:nth-child(4) {
+    flex: 0 0 15%;
+  }
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}

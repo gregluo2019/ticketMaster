@@ -1,0 +1,54 @@
+<mat-card *ngIf="event" class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Details</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <mat-form-field appearance="outline" fxFlex="20">
+            <mat-label>Name</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                matInput [ngModel]="event.name" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="20">
+            <mat-label>Start Time</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                matInput [ngModel]="event.startTime" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="60" *ngIf="event.info">
+            <mat-label>Info</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"
+                matInput [ngModel]="event.info" disabled></textarea>
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <mat-form-field appearance="outline" fxFlex="20">
+            <mat-label>Classification</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                matInput [ngModel]="event.classification" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="20">
+            <mat-label>Ticket Limit</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                matInput [ngModel]="event.ticketLimit" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="30">
+            <mat-label>Promoter</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                matInput [ngModel]="event.promoter" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="30">
+            <mat-label>Sales Time</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                matInput [ngModel]="event.salesTimeRange" disabled></textarea>
+        </mat-form-field>
+    </div>
+
+    <app-images-carousel [images]="event.images"></app-images-carousel>
+</mat-card>

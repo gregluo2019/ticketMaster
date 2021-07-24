@@ -1,0 +1,9 @@
+<mat-card *ngIf="attraction" class="mat-elevation-z8 my-4">
+    <mat-card-header>
+        <mat-card-title>
+            <span class="mat-display-1"> Attraction</span> <span class="ml-4"> {{attraction.name}}</span>
+        </mat-card-title>
+    </mat-card-header>
+
+    <app-images-carousel [images]="attraction.images"></app-images-carousel>
+</mat-card>

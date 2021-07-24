@@ -1,0 +1,24 @@
+<div *ngIf="printData && showQrCode">
+    <div class='print-area' id="myPrintArea">
+        <div fxLayout="column" fxLayoutAlign="center center">
+            <img style="height: 80px;" src="assets/logo.png">
+
+            <div style="font-size: 20px;">{{printData.textTop1}}</div>
+            <div style="font-size: 20px;" *ngIf="printData.textTop2">{{printData.textTop2}}</div>
+
+            <qrcode [qrdata]="printData.qrData" [width]="250" [errorCorrectionLevel]="'M'" [elementType]="'svg'"
+                [margin]='0'>
+            </qrcode>
+
+            <div style="font-size: 15px;">{{printData.textBottom1}}</div>
+            <div style="font-size: 15px;" *ngIf="printData.textBottom2">{{printData.textBottom2}}</div>
+
+            <div style="font-size: 18px;">Quality Assurance Approved</div>
+        </div>
+    </div>
+</div>
+
+<a #qrCodeElementDownloadLink></a>
+<!-- 
+showQrCode:{{showQrCode}}
+printData{{printData}}-->

@@ -1,0 +1,62 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="10px" class="mx-3">
+    <mat-form-field appearance="outline" fxFlex="30" fxFlex.xs="70">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter()" placeholder="Search" #filter>
+    </mat-form-field>
+
+    <button mat-stroked-button color="primary" (click)="exportAsXLSX()" style="margin-bottom: 1.3em;">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-icon>cloud_download</mat-icon>
+        <div>Export as Xlsx</div>
+      </div>
+    </button>
+
+    <button mat-icon-button color="accent" (click)="refresh()" matTooltip="Refresh">
+      <mat-icon aria-label="Edit">refresh</mat-icon>
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort [matSortDisableClear]="true" class="mx-3">
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>User Name</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.userName }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Details </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.action }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="start">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Start</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ formatTime(row.start) }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="end">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> End </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ formatTime(row.end) }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="duration">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Duration (hours) </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.duration}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Rate </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.rate}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No results</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 20, 50, 100, 200]" [pageSize]="20"></mat-paginator>
+</div>
+
+<!-- panels: {{panels |json}} -->

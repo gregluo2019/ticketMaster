@@ -1,0 +1,169 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./bootstrap.css";
+
+// deeppurple-amber.css
+// indigo-pink.css
+// pink-bluegrey.css
+// purple-green.css
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+}
+
+.editor-container {
+  text-align: left !important;
+  max-width: 100%;
+  // margin-right: auto;
+  // margin-left: auto;
+
+  .quote {
+    color: #8cc540;
+    font-style: italic;
+  }
+
+  .redText {
+    color: Red;
+    font-size: 12px;
+    font-family: Arial;
+  }
+
+  h1.titleText {
+    color: #69a8cf;
+    text-align: left;
+    margin-top: 40px;
+    font-weight: normal;
+  }
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding: 0 10px !important;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.correct-answer {
+  color: green;
+  background-color: #c8dfca;
+}
+
+.wrong-answer {
+  color: red;
+  background-color: #f7cccb;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+@media only screen and (max-width: 601px) {
+  .my-dialog .mat-dialog-container {
+    padding: 0 4px;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .my-dialog .mat-dialog-container {
+    padding: 0 24px;
+  }
+}
+
+b,
+strong {
+  font-weight: 700 !important;
+}
+
+.mat-radio-label {
+  white-space: normal !important;
+}
+
+.vertical-center {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.no-padding-x .mat-dialog-container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.html-content {
+  font-size: 18px;
+
+  td {
+    border: 1px solid gray;
+    padding: 8px 8px 0 8px;
+  }
+}
+
+.disable-text-selection {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+.cdk-drag-dragging,
+.cdk-drag-preview {
+  z-index: 1051 !important;
+}
+
+.mat-autocomplete-panel {
+  max-height: 500px !important;
+}
+
+// set drop down list height
+// .mat-select-panel {
+//   min-height: 350px;
+//   max-height: 80vh;
+// }
+
+.no-padding-dialog {
+  .mat-dialog-container {
+    padding: 0 !important;
+  }
+
+  min-width: 600px !important;
+}
+
+.mat-card-header-text {
+  width: 100%
+}
+
+
+/* Suffix this section at the end of your styles.css for toogling between @media screen and @media print mode */
+/*############################################################################################################*/
+// app-print-page {
+//   /* hide the printing component from @media screen */
+//   display: none;
+// }
+
+@media print {
+  /* invert the display (show/hide) properties of the main */
+  /* aplication component and the printing component       */
+
+
+  .no-print,
+  .cdk-overlay-container {
+    display: none;
+  }
+}
+
+/*#############################################################################################################*/

@@ -1,0 +1,13 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="outline" name="field">
+        <mat-label>Pick a venue</mat-label>
+        <input type="text" placeholder="Type and pick one venue" name="input" matInput [formControl]="myInput"
+            [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" name="selections" (optionSelected)="onSelect($event)"
+            [displayWith]="displayFn">
+            <mat-option *ngFor="let option of venues" [value]="option">
+                {{option.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>

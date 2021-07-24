@@ -1,0 +1,15 @@
+<div class="m-4 " *ngIf="event">
+    <div fxLayout="row" fxLayoutAlign="space-between center" mat-dialog-title>
+        <h1>Event</h1>
+
+        <button mat-icon-button color="warn" type="button" (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <app-event-view [event]="event"></app-event-view>
+
+    <app-attraction-view [attraction]="event.attraction"></app-attraction-view>
+
+    <app-venue-view [venue]="event.venue"></app-venue-view>
+</div>

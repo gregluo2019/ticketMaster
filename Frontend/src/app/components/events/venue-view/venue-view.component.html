@@ -1,0 +1,36 @@
+<mat-card *ngIf="venue" class=" mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title>
+            <h2> Venue</h2>
+        </mat-card-title>
+    </mat-card-header>
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between center">
+
+        <mat-form-field appearance="outline" fxFlex="50">
+            <mat-label>Venue Name</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                matInput [ngModel]="venue.name" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="50">
+            <mat-label>Venue Address</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                matInput [ngModel]="venue.address" disabled></textarea>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <mat-form-field appearance="outline" fxFlex="50">
+            <mat-label>Venue Info</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"
+                matInput [ngModel]="venue.generalInfo" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="50">
+            <mat-label>Venue Parking</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"
+                matInput [ngModel]="venue.parkingDetail" disabled></textarea>
+        </mat-form-field>
+    </div>
+
+    <app-images-carousel [images]="venue.images"></app-images-carousel>
+</mat-card>

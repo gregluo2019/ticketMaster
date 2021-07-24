@@ -1,0 +1,73 @@
+<div class="m-4 no-print">
+    <div fxLayout="row" fxLayoutAlign="space-between center" mat-dialog-title>
+        <h1>Job</h1>
+
+        <button mat-icon-button color="warn" type="button" (click)="close()" *ngIf="canEdit">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-expansion-panel [expanded]="true" class="mat-elevation-z8">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{form.get('jobNumber').value}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{form.get('description').value}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <ng-template matExpansionPanelContent>
+            <form [formGroup]="form" autocomplete="off" class="p-3">
+                <!-- style="overflow: unset;" -->
+                <div mat-dialog-content>
+                    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                        <div fxFlex="15">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Job Number</mat-label>
+                                <input matInput formControlName="jobNumber" required>
+                                <mat-error *ngIf="form.controls.jobNumber.errors?.required">Job number is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="70">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Description</mat-label>
+                                <input matInput formControlName="description">
+                            </mat-form-field>
+                        </div>
+                        <button mat-stroked-button color="primary" type="submit" [disabled]="!form.valid || !form.dirty"
+                            (click)="onSubmit()" *ngIf="canEdit" style="margin-bottom: 1.3em;">
+                            <div fxLayout="row" fxLayoutAlign="space-between center">
+                                <mat-icon>save</mat-icon>
+                                <div>Save</div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div *ngIf="form.value.id > 0">
+                        <app-qr-code [job]="job" [showText]="true"></app-qr-code>
+                    </div>
+                </div>
+
+            </form>
+        </ng-template>
+    </mat-expansion-panel>
+
+    <mat-tab-group mat-align-tabs="center" mat-stretch-tabs class="mat-elevation-z8 mt-4">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                Work Records {{getJobUserActionsCount()}}
+            </ng-template>
+            <app-job-user-list *ngIf="job && job.id>0"></app-job-user-list>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                Panels {{getPanelsCount()}}
+            </ng-template>
+            <app-panels-list *ngIf="job && job.id>0"></app-panels-list>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<app-print-page></app-print-page>

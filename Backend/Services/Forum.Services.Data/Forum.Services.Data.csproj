@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="AWSSDK.SimpleEmail" Version="3.7.0.30" />
+    <PackageReference Include="MailKit" Version="2.13.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Forum.Data.Common\Forum.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\Forum.Data.DataTransferObjects\Forum.Data.DataTransferObjects.csproj" />
+  </ItemGroup>
+
+</Project>

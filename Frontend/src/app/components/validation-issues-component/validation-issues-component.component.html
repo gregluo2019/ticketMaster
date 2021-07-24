@@ -1,0 +1,21 @@
+<div
+  *ngIf="validation && (!validation.valid || (showInfo && validation.hasInfo) || (showWarning && validation.hasWarning))">
+  <div class="message-box error validation-issue" *ngIf="filteredIssues('ERROR').length > 0">
+    <div *ngFor="let o of filteredIssues('ERROR')">
+      <span class="message">{{o.message}}</span>
+      <span class="hint">{{o.hint}}</span>
+    </div>
+  </div>
+  <div class="message-box warning validation-issue" *ngIf="filteredIssues('WARNING').length > 0">
+    <div *ngFor="let o of filteredIssues('WARNING')">
+      <span class="message">{{o.message}}</span>
+      <span class="hint">{{o.hint}}</span>
+    </div>
+  </div>
+  <div class="message-box info validation-issue" *ngIf="filteredIssues('INFO').length > 0">
+    <div *ngFor="let o of filteredIssues('INFO')">
+      <span class="message">{{o.message}}</span>
+      <span class="hint">{{o.hint}}</span>
+    </div>
+  </div>
+</div>

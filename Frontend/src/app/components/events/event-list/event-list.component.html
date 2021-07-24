@@ -1,0 +1,70 @@
+<div class="no-print">
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between center" class="p-3">
+        <h1 fxFlex="10">Events</h1>
+
+        <app-classification-select fxFlex="15" [(ngModel)]="selectedClassification" (ngModelChange)="loadData()">
+        </app-classification-select>
+        <app-venue-select fxFlex="30" [(ngModel)]="selectedVenue" (ngModelChange)="loadData()"></app-venue-select>
+
+        <mat-form-field appearance="outline" fxFlex="18">
+            <mat-label>Filter</mat-label>
+            <input matInput placeholder="Search" #filter />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="max-width: 320px;" fxFlex='22'>
+            <mat-label>Enter or pick a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date" [(ngModel)]="startDate" (ngModelChange)="loadData()">
+                <input matEndDate placeholder="End date" [(ngModel)]="endDate" (ngModelChange)="loadData()">
+
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </div>
+
+    <mat-paginator [length]="countOfEvents" [pageSize]="20" showFirstLastButtons>
+    </mat-paginator>
+    <mat-table #table [dataSource]="dataSource" matSort [matSortDisableClear]="true" class="mat-cell">
+        <ng-container matColumnDef="images">
+            <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <img [src]="row.images[0]" style="height:80px;">
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.name }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="startTime">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Start Time </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.startTime }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="info">
+            <mat-header-cell *matHeaderCellDef> Info </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.info?.substring(0,200) }}{{(row.info?.length>200)?'...':''}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row; let i = index">
+                <button mat-icon-button color="accent" (click)="openEventDetailsPage(row)"
+                    matTooltip="Details of the Event">
+                    <mat-icon aria-label="Edit">dashboard</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="openEventDetailsPage(row)">
+        </mat-row>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No results</td>
+        </tr>
+    </mat-table>
+</div>

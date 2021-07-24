@@ -1,0 +1,11 @@
+:host ::ng-deep .my-note div:not(:first-child) {
+  margin-top: 15px;
+}
+
+:host ::ng-deep .my-note .angular-editor-toolbar div {
+  margin: 0 !important;
+}
+
+mat-checkbox label {
+  margin: 0;
+}

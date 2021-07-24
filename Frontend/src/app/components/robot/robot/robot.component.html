@@ -1,0 +1,28 @@
+<form [formGroup]="form" novalidate class="p-4 mat-elevation-z8 ">
+    <div fxLayout="row" fxLayoutAlign="space-around  center">
+        <mat-form-field appearance="outline" fxFlex="60">
+            <mat-label>Commands</mat-label>
+            <textarea matInput formControlName="commands" rows="7" [placeholder]="placeholder" (blur)="validateForm()">
+            </textarea>
+            <mat-error *ngIf="displayMessage.commands"> {{ displayMessage.commands }} </mat-error>
+        </mat-form-field>
+
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <button mat-raised-button color="primary" (click)="execute()" style="max-width:200px"
+                [disabled]="!form.valid || !form.dirty">
+                Execute
+            </button>
+
+            <div [@fadeInOutHeight]="(report && !errorMessage) ? 'in' : 'out'">
+                <div class="report" *ngIf="report && !errorMessage"> {{report}}</div>
+            </div>
+            <div [@fadeInOutHeight]="errorMessage ? 'in' : 'out'">
+                <mat-error *ngIf="errorMessage">
+                    {{errorMessage}}
+                </mat-error>
+            </div>
+        </div>
+    </div>
+
+    <app-grid-view [toyRobot]="toyRobot$ | async"></app-grid-view>
+</form>

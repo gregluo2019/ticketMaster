@@ -1,0 +1,103 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="10px" class="mx-3">
+
+  <!-- <div *ngIf="!isSmallScreen">
+      <button mat-stroked-button color="primary" (click)="openPanelDialog(null)" class="mb-3">
+        <mat-icon> add </mat-icon>{{"Add New"| translate}}
+      </button>
+    </div> -->
+
+  <mat-form-field appearance="outline" fxFlex="30" fxFlex.xs="70">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+  </mat-form-field>
+
+
+  <button mat-stroked-button color="primary" (click)="exportAsXLSX()" style="margin-bottom: 1.3em;">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-icon>cloud_download</mat-icon>
+      <div>Export as Xlsx</div>
+    </div>
+  </button>
+
+  <button mat-icon-button color="accent" (click)="refresh()" matTooltip="Refresh">
+    <mat-icon aria-label="Edit">refresh</mat-icon>
+  </button>
+</div>
+
+<mat-paginator [pageSizeOptions]="[10, 20, 50, 100, 200]" [pageSize]="20"></mat-paginator>
+
+<div fxLayout="column" fxLayoutAlign="start stretch" [ngStyle]="{'height.px':tableHeight}">
+  <table mat-table [dataSource]="dataSource" matSort [matSortDisableClear]="true" class="mx-3" #table>
+    <ng-container matColumnDef="panelId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Panel ID</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.panelId }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="qty">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Qty. </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.qty }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="length">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Length </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.length }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="width">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Width</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.width }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="depth">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Depth </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.depth }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="area">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Area </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.area }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="totalArea">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Total Area </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.totalArea }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="color">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Colour </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.color }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="colorType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Colour Type </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.colorType }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="packingTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Packing </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.packingTime | UtcToLocal }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Staff </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.userName }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="qrCode">
+      <mat-header-cell *matHeaderCellDef>QR Code </mat-header-cell>
+
+      <mat-cell *matCellDef="let row">
+        <!-- style="overflow: unset;" -->
+        <app-qr-code [panel]="row"></app-qr-code>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No results</td>
+    </tr>
+  </table>
+</div>
+<mat-paginator [pageSizeOptions]="[10, 20, 50, 100, 200]" [pageSize]="20"></mat-paginator>
+
+
+<!-- panels: {{panels |json}} -->
