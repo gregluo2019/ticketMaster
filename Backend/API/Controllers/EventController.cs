@@ -1,34 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Forum.Data;
-using Forum.Data.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using System.Net.Http;
 using System.Web;
-using System.IO;
-using System.Net;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.StaticFiles;
 using Forum.Data.Models.Users;
-using Forum.Data.DataTransferObjects.InputModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Forum.Data.DataTransferObjects.ViewModels.User;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using Forum.WebApi.Utils;
-using System.Net.Http.Json;
-using Microsoft.AspNetCore.WebUtilities;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 
 namespace Forum.WebApi.Controllers
 {
