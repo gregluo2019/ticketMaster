@@ -1,35 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Forum.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
 using System.Web;
-using Forum.Data.Models.Users;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Forum.WebApi.Utils;
 
 namespace Forum.WebApi.Controllers
 {
-    public class eventResponse
-    {
-        public object _embedded { get; set; }
-        public object _links { get; set; }
-        public object page { get; set; }
-
-    }
-    public class EventParameter
-    {
-        public string isSchool { get; set; }
-        public string userEmail { get; set; }        
-    }
-    public class ResultOfEvent
-    {
-       // public ChineseTest[] Data { get; set; }
-        public int Count { get; set; }
-    }
     public class PaginationDataOfEvent
     {
         public string Sort { get; set; }
@@ -44,7 +24,6 @@ namespace Forum.WebApi.Controllers
         public string EndDateTime { get; set; }
         public string VenueId { get; set; }
         public string ClassificationId { get; set; }
-        
     }
 
     public class VenueInput
@@ -55,16 +34,10 @@ namespace Forum.WebApi.Controllers
     [AllowAnonymous]
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class EventController : BaseController
+    public class EventController : ControllerBase
     {
-
-        private readonly ForumContext _context;
-        protected UserManager<User> UserManager { get; set; }
-
-        public EventController(ForumContext context, ILogger<BaseController> logger, IMapper mapper, UserManager<User> userManager) : base(logger, mapper)
+        public EventController() 
         {
-            _context = context;
-            this.UserManager = userManager;
         }
 
         [AllowAnonymous]
@@ -95,11 +68,8 @@ namespace Forum.WebApi.Controllers
                         {
                             return this.BadRequest(new ReturnMessage { Message = response.StatusCode.ToString() });
                         }
-
                     }
                 }
-
-                return NoContent();
             }
             catch (Exception e)
             {
@@ -186,8 +156,6 @@ namespace Forum.WebApi.Controllers
 
                     }
                 }
-
-                return NoContent();
             }
             catch (Exception e)
             {
@@ -233,8 +201,6 @@ namespace Forum.WebApi.Controllers
 
                     }
                 }
-
-                return NoContent();
             }
             catch (Exception e)
             {
@@ -276,14 +242,11 @@ namespace Forum.WebApi.Controllers
 
                     }
                 }
-
-                return NoContent();
             }
             catch (Exception e)
             {
                 return this.BadRequest(new { Message = e.Message });
             }
         }
-
     }
 }
