@@ -1,8 +1,0 @@
-<mat-grid-list cols="5" rowHeight="150px">
-    <div *ngFor="let gridNumber of gridArray">
-        <mat-grid-tile [ngStyle]="{'border-left': gridBorderLeft(gridNumber),'border-right': gridBorderRight(gridNumber),
-        'border-top': gridBorderTop(gridNumber),'border-bottom': gridBorderBottom(gridNumber),
-        'background-color': gridBkColor(gridNumber) }">
-        </mat-grid-tile>
-    </div>
-</mat-grid-list>

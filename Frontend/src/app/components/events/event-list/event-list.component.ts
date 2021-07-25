@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Attraction, Classification, Event, PaginationDataOfEvent, Venue } from '../events.model';
+import { Classification, Event, PaginationDataOfEvent, Venue } from '../events.model';
 import { EventListDataSource } from './event-list-data-source';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
@@ -10,19 +10,20 @@ import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DomSanitizer } from '@angular/platform-browser';
-import { BaseComponent } from '../../base.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-event-list',
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.scss']
 })
-export class EventListComponent extends BaseComponent implements OnInit {
+export class EventListComponent implements OnInit {
   events: Event[] = [];
   countOfEvents: number;
   venues: Venue[] = [];
   startDate = null
   endDate = null
+  isSmallScreen = false
 
   selectedVenue: Venue = null
   selectedClassification: Classification = null
@@ -30,9 +31,8 @@ export class EventListComponent extends BaseComponent implements OnInit {
   displayedColumns = [];
   dataSource: EventListDataSource;
 
-  constructor(public dialog: MatDialog, private router: Router,
+  constructor(public dialog: MatDialog, private router: Router, private spinner: NgxSpinnerService,
     public appService: AppService, protected sanitizer: DomSanitizer) {
-    super()
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,6 +40,8 @@ export class EventListComponent extends BaseComponent implements OnInit {
   @ViewChild("filter") filter: ElementRef;
 
   ngOnInit() {
+    this.isSmallScreen = window.innerWidth < 600
+
     if (this.appService.events.length === 0) {
       this.appService.getEvents()
     } else {

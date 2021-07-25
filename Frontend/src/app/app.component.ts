@@ -1,6 +1,4 @@
-import { Component, Injector, OnInit } from "@angular/core";
-import { TranslateService } from '@ngx-translate/core';
-import { InjectorService } from "./core/services/injector.service";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-root",
@@ -8,22 +6,8 @@ import { InjectorService } from "./core/services/injector.service";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  title = "VitraGroup";
+  title = "TicketMaster";
 
-  constructor(injector: Injector, private translate: TranslateService) {
-    InjectorService.setInjector(injector);
-
-    translate.addLangs(['en', 'cn']);
-
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    let lang = localStorage.getItem('lang')
-    if (lang) {
-      translate.use(lang);
-    } else {
-      translate.use('en');
-    }
-  }
-
-
+  constructor() { }
   ngOnInit(): void { }
 }

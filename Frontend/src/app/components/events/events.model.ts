@@ -1,9 +1,3 @@
-import { Injectable } from '@angular/core';
-import { MatDateFormats, NativeDateAdapter } from '@angular/material/core';
-import * as moment from 'moment';
-import { User } from "src/app/core/models/auth/register.model";
-import { PROJECT_STATUS } from "src/app/shared/ConstantItems";
-
 export class Event {
     constructor(
         public id: string,
