@@ -37,6 +37,6 @@ export class EventDetailsComponent implements OnInit {
   }
 
   close(): void {
-    this.router.navigate([`/events`]);
+    this.router.navigate([`/`]);
   }
 }
