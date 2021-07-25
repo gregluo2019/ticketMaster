@@ -222,25 +222,6 @@ namespace API
               //  endpoints.MapHub<NotifyHub>("/api/notify");
             });
 
-
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<ForumContext>();
-
-                if (env.IsDevelopment())
-                {
-                    context.Database.Migrate();
-                }
-                var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
-                var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
-                var accountService = serviceScope.ServiceProvider.GetService<IAccountService>();
-                var logger = serviceScope.ServiceProvider.GetService<ILogger<IDatabaseInitializer>>();
-                var userRepository = serviceScope.ServiceProvider.GetService<IRepository<User>>();
-
-
-                new DatabaseInitializer().Seed(roleManager, userManager, Configuration, accountService, logger, userRepository).Wait();
-            }
-
             loggerFactory.AddContext(app, LogLevel.Warning);
             loggerFactory.AddFile("Logs/myapp-{Date}.txt", outputTemplate: "{Timestamp:HH:mm}-{Level:u1}: {Message}{NewLine}{Exception}");
 

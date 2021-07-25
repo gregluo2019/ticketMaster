@@ -2,7 +2,7 @@
 
 Implemented with Angular 12 and Material Design
 
-## Play it directly
+## Deployed at AWS and please access it directly
 
 Open the URL  `https://toplearning.com.au/events` to use it. Have fun!
 
