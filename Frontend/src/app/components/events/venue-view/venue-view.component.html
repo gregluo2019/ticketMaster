@@ -24,7 +24,7 @@
         fxLayoutAlign.xs="space-around stretch">
         <mat-form-field appearance="outline" fxFlex="100">
             <mat-label>Venue Info</mat-label>
-            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="30"
                 matInput [ngModel]="venue.generalInfo" disabled></textarea>
         </mat-form-field>
     </div>
@@ -33,7 +33,7 @@
         fxLayoutAlign.xs="space-around stretch">
         <mat-form-field appearance="outline" fxFlex="100">
             <mat-label>Venue Parking</mat-label>
-            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="30"
                 matInput [ngModel]="venue.parkingDetail" disabled></textarea>
         </mat-form-field>
     </div>

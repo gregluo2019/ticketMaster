@@ -50,7 +50,7 @@
         fxLayoutAlign.xs="space-around stretch">
         <mat-form-field appearance="outline" *ngIf="event.info" fxFlex="100">
             <mat-label>Info</mat-label>
-            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="20"
                 matInput [ngModel]="event.info" disabled></textarea>
         </mat-form-field>
     </div>
