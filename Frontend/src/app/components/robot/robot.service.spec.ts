@@ -46,8 +46,8 @@ describe('RobotService', () => {
         let commands = ["PLACE -1,2,EAST"]
         service.executeCommands(commands)
         service.generateReport()
-        expect(service.toyRobot.position.x).toBe(0);
-        expect(service.toyRobot.position.y).toBe(0);
+        expect(service.toyRobot.position.x).toBe(-1);
+        expect(service.toyRobot.position.y).toBe(-1);
         expect(service.toyRobot.direction).toBe('NORTH');
     });
 
